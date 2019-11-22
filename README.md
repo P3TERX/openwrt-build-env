@@ -74,7 +74,7 @@ The default SSH user name and password is `user`. If you are making the containe
 - Change password:
   
   ```shell
-  docker exec openwrt-build-env sudo passwd user
+  docker exec -it openwrt-build-env sudo passwd user
   ```
 
 - Don't allow passwords at all, use keys instead:

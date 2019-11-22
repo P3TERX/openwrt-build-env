@@ -12,7 +12,7 @@ LABEL maintainer P3TERX
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y git wget curl vim nano htop tmux sudo ca-certificates zsh command-not-found uuid-runtime tzdata openssh-server && \
+    apt-get install -y git wget curl vim nano htop tmux tree sudo ca-certificates zsh command-not-found uuid-runtime tzdata openssh-server && \
     apt-get install -y build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev patch unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex uglifyjs git-core gcc-multilib p7zip p7zip-full msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
@@ -21,7 +21,10 @@ RUN apt-get update && apt-get upgrade -y && \
     echo 'user:user' | chpasswd && \
     echo 'user ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/user && \
     chmod 440 /etc/sudoers.d/user && \
-    ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+    ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+    curl -fsSL https://raw.githubusercontent.com/cjbassi/gotop/master/scripts/download.sh | bash && \
+    mv gotop /usr/local/bin && \
+    chmod +x /usr/local/bin/gotop
 
 USER user
 WORKDIR /home/user
