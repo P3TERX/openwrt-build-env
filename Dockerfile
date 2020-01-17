@@ -5,8 +5,8 @@
 # Author: P3TERX
 # Blog: https://p3terx.com
 #=================================================
-ARG IMAGE_TAG
-FROM p3terx/ubuntu-plus:${IMAGE_TAG:-latest}
+ARG IMAGE_TAG=latest
+FROM p3terx/ubuntu-plus:$IMAGE_TAG
 
 LABEL maintainer P3TERX
 
