@@ -1,11 +1,11 @@
 # openwrt-build-env
 
 [![LICENSE](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square&label=LICENSE)](https://github.com/P3TERX/openwrt-build-env/blob/master/LICENSE)
-[![GitHub Stars](https://img.shields.io/github/stars/P3TERX/openwrt-build-env.svg?style=flat-square&label=Stars)](https://github.com/P3TERX/openwrt-build-env/stargazers)
-[![GitHub Forks](https://img.shields.io/github/forks/P3TERX/openwrt-build-env.svg?style=flat-square&label=Forks)](https://github.com/P3TERX/openwrt-build-env/fork)
-
-[![Docker Pulls](https://img.shields.io/docker/pulls/p3terx/openwrt-build-env.svg?style=flat-square&label=Docker%20Pulls&color=orange)](https://hub.docker.com/r/p3terx/openwrt-build-env)
-[![Docker Stars](https://img.shields.io/docker/stars/p3terx/openwrt-build-env.svg?style=flat-square&label=Docker%20Stars)](https://hub.docker.com/r/p3terx/openwrt-build-env)
+[![GitHub Stars](https://img.shields.io/github/stars/P3TERX/openwrt-build-env.svg?style=flat-square&label=Stars&logo=github)](https://github.com/P3TERX/openwrt-build-env/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/P3TERX/openwrt-build-env.svg?style=flat-square&label=Forks&logo=github)](https://github.com/P3TERX/openwrt-build-env/fork)
+[![Docker Stars](https://img.shields.io/docker/stars/p3terx/openwrt-build-env.svg?style=flat-square&label=Docker%20Stars&logo=docker)](https://hub.docker.com/r/p3terx/openwrt-build-env)
+[![Docker Pulls](https://img.shields.io/docker/pulls/p3terx/openwrt-build-env.svg?style=flat-square&label=Docker%20Pulls&logo=docker&color=orange)](https://hub.docker.com/r/p3terx/openwrt-build-env)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/P3TERX/openwrt-build-env/Docker%20images%20publish?label=Actions&logo=github&style=flat-square)
 
 OpenWrt build environment in docker.
 
