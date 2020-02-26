@@ -1,0 +1,69 @@
+#==================================================
+# https://github.com/P3TERX/openwrt-build-env
+# Description: OpenWrt build environment in docker
+# Lisence: MIT
+# Author: P3TERX
+# Blog: https://p3terx.com (chinese)
+#==================================================
+name: Docker images publish
+
+on:
+  release:
+    types: published
+  push:
+    paths:
+      - 'Dockerfile'
+  schedule:
+    - cron: 10 22 * * 5
+
+jobs:
+  publish:
+    name: Publish
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        IMAGE_TAG: [latest, 18.04]
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Install buildx
+      run: |
+        curl -s https://api.github.com/repos/docker/buildx/releases/latest \
+        | grep "browser_download_url.*buildx-*.*linux-amd64" \
+        | cut -d : -f 2,3 \
+        | tr -d \" \
+        | wget -qi -
+        mkdir -p ~/.docker/cli-plugins/
+        mv buildx* ~/.docker/cli-plugins/docker-buildx
+        chmod +x ~/.docker/cli-plugins/docker-buildx
+
+    - name: Set up buildx
+      run: |
+        docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+        docker buildx create --use --name multi-arch-builder
+
+    - name: Available platforms
+      run: |
+        docker buildx inspect --bootstrap | grep Platforms
+
+    - name: Login to Docker Hub
+      run: |
+        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Build and push
+      env:
+        PLATFORMS: linux/amd64
+        IMAGE_NAME: p3terx/openwrt-build-env
+        IMAGE_TAG: ${{ matrix.IMAGE_TAG }}
+        DOCKERFILE: Dockerfile
+        FILE_PATH: .
+      run: |
+        docker buildx build --push \
+          --platform ${PLATFORMS} \
+          --build-arg IMAGE_TAG \
+          -t ${IMAGE_NAME}:${IMAGE_TAG} \
+          -f ${DOCKERFILE} \
+          ${FILE_PATH}
