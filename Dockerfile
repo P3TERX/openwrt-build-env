@@ -1,10 +1,8 @@
-#=================================================
 # https://github.com/P3TERX/openwrt-build-env
-# Description: OpenWrt build environment in docker
-# Lisence: MIT
-# Author: P3TERX
-# Blog: https://p3terx.com
-#=================================================
+# OpenWrt build environment in docker
+# MIT License
+# Copyright (c) 2020 P3TERX <https://p3terx.com>
+
 ARG IMAGE_TAG=20.04
 FROM p3terx/ubuntu-plus:${IMAGE_TAG}
 
