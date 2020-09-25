@@ -3,8 +3,8 @@
 # MIT License
 # Copyright (c) 2020 P3TERX <https://p3terx.com>
 
-ARG IMAGE_TAG=20.04
-FROM p3terx/ubuntu-plus:${IMAGE_TAG}
+ARG BASE_IMAGE_TAG=20.04
+FROM linuxplus/ubuntu:${BASE_IMAGE_TAG}
 
 USER root
 

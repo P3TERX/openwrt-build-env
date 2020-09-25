@@ -24,12 +24,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        IMAGE_TAG: [20.04, 18.04]
+        BASE_IMAGE_TAG: [20.04, 18.04]
         include:
-          - IMAGE_TAG: 20.04
+          - BASE_IMAGE_TAG: 20.04
             DOCKER_TAG: latest,20.04
             DEPENDS_LIST: depends-ubuntu-2004
-          - IMAGE_TAG: 18.04
+          - BASE_IMAGE_TAG: 18.04
             DOCKER_TAG: 18.04
             DEPENDS_LIST: depends-ubuntu-1804
 
@@ -45,7 +45,7 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: p3terx/openwrt-build-env
         tags: ${{ matrix.DOCKER_TAG }}
-        build_args: IMAGE_TAG=${{ matrix.IMAGE_TAG }},DEPENDS_LIST=${{ matrix.DEPENDS_LIST }}
+        build_args: BASE_IMAGE_TAG=${{ matrix.BASE_IMAGE_TAG }},DEPENDS_LIST=${{ matrix.DEPENDS_LIST }}
         dockerfile: Dockerfile
         path: .
 
