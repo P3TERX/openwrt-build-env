@@ -3,14 +3,19 @@
 # MIT License
 # Copyright (c) 2019-2020 P3TERX <https://p3terx.com>
 
-name: Docker images publish
+name: Docker Images Publish
 
 on:
   repository_dispatch:
-    types: [Manual*, Auto* ,test]
   push:
     paths:
       - 'Dockerfile'
+  workflow_dispatch:
+    inputs:
+      test:
+        description: 'Build test'
+        required: false
+        default: 'false'
 
 jobs:
   publish:
@@ -50,10 +55,9 @@ jobs:
 
     steps:
     - name: Trigger other image builds
-      if: (!contains(github.event.action, 'test'))
-      env:
-        ACTIONS_TRIGGER_TOKEN: ${{ secrets.ACTIONS_TRIGGER }}
-        REPO_NAME: P3TERX/Gitpod-OpenWrt
-        TRIGGER_KEYWORDS: 'Auto trigger'
-      run: |
-        sh <(curl -fsSL git.io/trigger.sh) "$ACTIONS_TRIGGER_TOKEN" "$REPO_NAME" "$TRIGGER_KEYWORDS"
+      uses: peter-evans/repository-dispatch@v1
+      if: (!contains(github.event.action, 'test')) || (github.event.inputs.test == 'true' && github.event.inputs.test  != 'false')
+      with:
+        token: ${{ secrets.ACTIONS_TRIGGER }}
+        repository: P3TERX/Gitpod-OpenWrt
+        event-type: Base Image Update
